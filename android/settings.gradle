@@ -1,0 +1,3 @@
+rootProject.name = 'hardly'
+
+include ':app'
