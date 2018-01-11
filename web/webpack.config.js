@@ -19,14 +19,14 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".web.js", ".js"]
+    extensions: [".web.js", ".web.jsx", ".js", ".jsx"]
   },
 
   module: {
     rules: [
       // Javascript
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         include: [
           path.resolve(rootDirectory, "web/index.web.js"),
           path.resolve(rootDirectory, "src"),
