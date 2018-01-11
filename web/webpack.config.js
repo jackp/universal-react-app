@@ -19,7 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".web.js", ".web.jsx", ".js", ".jsx"]
+    extensions: [".web.js", ".js"]
   },
 
   module: {
