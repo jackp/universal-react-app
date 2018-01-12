@@ -1,11 +1,19 @@
 import React from "react";
 
-import Heading from "components/atoms/Heading";
+import { Form } from "components/organisms";
 import GenericTemplate from "components/templates/GenericTemplate";
 
 const LandingPage = () => (
   <GenericTemplate>
-    <Heading level={1}>LandingPage</Heading>
+    <Form
+      title="Login"
+      fields={[
+        { label: "Email", name: "email" },
+        { label: "Password", name: "password" },
+      ]}
+      action="Login"
+      onSubmit={(data) => console.log(data)}
+    />
   </GenericTemplate>
 );
 

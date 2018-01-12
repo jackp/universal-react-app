@@ -42,6 +42,11 @@ module.exports = {
         ],
         loader: "awesome-typescript-loader",
       },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader",
+      },
       // Images
       {
         test: /\.(gif|jpe?g|png|svg)$/,
@@ -83,6 +88,7 @@ module.exports = {
   ],
 
   // Development settings
+  devtool: "source-map",
   devServer: {
     historyApiFallback: true,
     stats: "errors-only",

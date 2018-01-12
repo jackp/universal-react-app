@@ -2,6 +2,8 @@ import React from "react";
 import { TextInput, TextInputProperties } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
+export { TextInputProperties as InputProps };
+
 const Input = (props: TextInputProperties) => (
   <TextInput {...props} style={styles.input} />
 );

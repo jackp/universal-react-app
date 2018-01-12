@@ -1,13 +1,17 @@
 import React from "react";
-import { TouchableHighlight, TouchableHighlightProperties } from "react-native";
+import {
+  Text,
+  TouchableHighlight,
+  TouchableHighlightProperties,
+} from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 interface IProps extends TouchableHighlightProperties {
-  children: React.ReactChild;
+  title?: string;
 }
 const Button = (props: IProps) => (
-  <TouchableHighlight style={styles.button}>
-    {props.children}
+  <TouchableHighlight style={styles.button} {...props}>
+    <Text>{props.title}</Text>
   </TouchableHighlight>
 );
 
