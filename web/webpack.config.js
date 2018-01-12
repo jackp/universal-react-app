@@ -6,6 +6,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlPlugin = require("html-webpack-plugin");
+const GoogleFontsPlugin = require("google-fonts-webpack-plugin");
 
 const rootDirectory = path.resolve(__dirname, "../");
 const __DEV__ = process.env.NODE_ENV !== "production";
@@ -19,7 +20,8 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".web.js", ".js"]
+    extensions: [".web.js", ".js"],
+    modules: [path.resolve(rootDirectory, "src"), "node_modules"]
   },
 
   module: {
@@ -30,7 +32,11 @@ module.exports = {
         include: [
           path.resolve(rootDirectory, "web/index.web.js"),
           path.resolve(rootDirectory, "src"),
-          path.resolve(rootDirectory, "node_modules/react-native-uncompiled")
+          path.resolve(rootDirectory, "node_modules/react-native-uncompiled"),
+          path.resolve(
+            rootDirectory,
+            "node_modules/react-native-extended-stylesheet"
+          )
         ],
         use: {
           loader: "babel-loader",
@@ -63,6 +69,17 @@ module.exports = {
       __DEV__
     }),
     // Insert processed modules into html
-    new HtmlPlugin({ template: path.resolve(rootDirectory, "web/index.html") })
-  ]
+    new HtmlPlugin({ template: path.resolve(rootDirectory, "web/index.html") }),
+    // Download Google Fonts locally
+    new GoogleFontsPlugin({
+      fonts: [{ family: "Roboto" }],
+      path: "src/assets/fonts/"
+    })
+  ],
+
+  // Development settings
+  devServer: {
+    historyApiFallback: true
+    // stats: "errors-only"
+  }
 };
