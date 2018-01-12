@@ -1,11 +1,11 @@
 import React from "react";
-import { Text } from "react-native";
 
+import Heading from "components/atoms/Heading";
 import GenericTemplate from "components/templates/GenericTemplate";
 
 const LandingPage = () => (
   <GenericTemplate>
-    <Text>LandingPage</Text>
+    <Heading level={1}>LandingPage</Heading>
   </GenericTemplate>
 );
 
