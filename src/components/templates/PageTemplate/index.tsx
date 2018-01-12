@@ -4,7 +4,11 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 import Navigation from "components/organisms/Navigation";
 
-const PageTemplate = props => (
+interface IProps {
+  children: React.ReactChild;
+}
+
+const PageTemplate = (props: IProps) => (
   <View style={styles.container}>
     <Navigation />
     <View style={styles.main}>{props.children}</View>
@@ -13,13 +17,13 @@ const PageTemplate = props => (
 
 const styles = EStyleSheet.create({
   container: {
+    flexDirection: "row",
     height: "100%",
-    flexDirection: "row"
   },
   main: {
     flex: 1,
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 });
 
 export default PageTemplate;

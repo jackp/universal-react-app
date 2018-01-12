@@ -1,14 +1,12 @@
-/**
- * <App />
- */
 import React from "react";
 import { Text, View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-import LandingPage from "components/pages/LandingPage";
-import DashboardPage from "components/pages/DashboardPage";
+import { Link, Route, Router } from "router/index";
 
-import { Router, Link, Route } from "./router";
+import DashboardPage from "components/pages/DashboardPage";
+import LandingPage from "components/pages/LandingPage";
+
 import theme from "./styles/theme";
 
 const App = () => (
@@ -25,8 +23,8 @@ EStyleSheet.build(theme);
 
 const styles = EStyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default App;

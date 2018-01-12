@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 const Navigation = () => (
@@ -14,9 +14,9 @@ const Navigation = () => (
 
 const styles = EStyleSheet.create({
   container: {
+    backgroundColor: "#ECECEC",
     width: "250px",
-    backgroundColor: "#ECECEC"
-  }
+  },
 });
 
 export default Navigation;

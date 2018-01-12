@@ -7,45 +7,40 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlPlugin = require("html-webpack-plugin");
 const GoogleFontsPlugin = require("google-fonts-webpack-plugin");
+const {
+  CheckerPlugin,
+  TsConfigPathsPlugin,
+} = require("awesome-typescript-loader");
 
 const rootDirectory = path.resolve(__dirname, "../");
 const __DEV__ = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: ["babel-polyfill", path.resolve(rootDirectory, "web/index.web.js")],
+  entry: ["babel-polyfill", path.resolve(rootDirectory, "web/index.web.ts")],
 
   output: {
     path: path.resolve(rootDirectory, "web/dist"),
-    filename: "bundle.web.js"
+    filename: "bundle.web.js",
   },
 
   resolve: {
-    extensions: [".web.js", ".js"],
-    modules: [path.resolve(rootDirectory, "src"), "node_modules"]
+    extensions: [".web.ts", ".web.tsx", ".ts", ".tsx", ".js"],
+    modules: [path.resolve(rootDirectory, "src"), "node_modules"],
+    alias: {
+      "react-native": "react-native-web",
+    },
   },
 
   module: {
     rules: [
-      // Javascript
+      // Typescript
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         include: [
-          path.resolve(rootDirectory, "web/index.web.js"),
+          path.resolve(rootDirectory, "web/index.web.ts"),
           path.resolve(rootDirectory, "src"),
-          path.resolve(rootDirectory, "node_modules/react-native-uncompiled"),
-          path.resolve(
-            rootDirectory,
-            "node_modules/react-native-extended-stylesheet"
-          )
         ],
-        use: {
-          loader: "babel-loader",
-          options: {
-            cacheDirectory: true,
-            plugins: ["react-native-web"],
-            presets: ["react-native"]
-          }
-        }
+        loader: "awesome-typescript-loader",
       },
       // Images
       {
@@ -53,33 +48,43 @@ module.exports = {
         use: {
           loader: "url-loader",
           options: {
-            name: "[name].[ext]"
-          }
-        }
-      }
-    ]
+            name: "[name].[ext]",
+          },
+        },
+      },
+    ],
   },
 
   plugins: [
     // Set environment
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(
-        process.env.NODE_ENV || "development"
+        process.env.NODE_ENV || "development",
       ),
-      __DEV__
+      __DEV__,
     }),
     // Insert processed modules into html
     new HtmlPlugin({ template: path.resolve(rootDirectory, "web/index.html") }),
     // Download Google Fonts locally
     new GoogleFontsPlugin({
       fonts: [{ family: "Roboto" }],
-      path: "src/assets/fonts/"
-    })
+      path: "src/assets/fonts/",
+    }),
+    // Advanced path resolution for Typescript
+    new TsConfigPathsPlugin(),
+    ...(__DEV__
+      ? [
+          // Development-only plugins
+          new CheckerPlugin(),
+        ]
+      : [
+          // Production-only plugins
+        ]),
   ],
 
   // Development settings
   devServer: {
-    historyApiFallback: true
-    // stats: "errors-only"
-  }
+    historyApiFallback: true,
+    stats: "errors-only",
+  },
 };
