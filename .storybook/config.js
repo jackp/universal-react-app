@@ -4,7 +4,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 import centered from "./decorator-centered";
 
-const req = require.context("../src/components", true, /\.stories.js$/);
+const req = require.context("../src/components", true, /\.stories\.js$/);
 
 function loadStories() {
   req.keys().forEach((filename) => req(filename));

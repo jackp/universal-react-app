@@ -14,7 +14,7 @@ const styles = EStyleSheet.create({
   root: {
     fontFamily: "Roboto",
     fontSize: "1rem",
-    fontWeight: 500,
+    fontWeight: "500",
   },
 
   h1: {
