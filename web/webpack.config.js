@@ -16,10 +16,15 @@ const rootDirectory = path.resolve(__dirname, "../");
 const __DEV__ = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: ["babel-polyfill", path.resolve(rootDirectory, "web/index.web.ts")],
+  entry: [
+    "babel-polyfill",
+    "react-hot-loader/patch",
+    path.resolve(rootDirectory, "web/index.web.ts"),
+  ],
 
   output: {
     path: path.resolve(rootDirectory, "web/dist"),
+    publicPath: "/",
     filename: "bundle.web.js",
   },
 
@@ -40,7 +45,7 @@ module.exports = {
           path.resolve(rootDirectory, "web/index.web.ts"),
           path.resolve(rootDirectory, "src"),
         ],
-        loader: "awesome-typescript-loader",
+        loaders: ["react-hot-loader/webpack", "awesome-typescript-loader"],
       },
       {
         enforce: "pre",
@@ -81,6 +86,7 @@ module.exports = {
       ? [
           // Development-only plugins
           new CheckerPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
         ]
       : [
           // Production-only plugins
@@ -88,8 +94,9 @@ module.exports = {
   ],
 
   // Development settings
-  devtool: "source-map",
+  devtool: __DEV__ ? "eval" : "source-map",
   devServer: {
+    hot: true,
     historyApiFallback: true,
     stats: "errors-only",
   },

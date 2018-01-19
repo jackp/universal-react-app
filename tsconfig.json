@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "sourceMap": true,
+    "experimentalDecorators": true,
     "paths": {
       "*": [
         "*",
@@ -21,6 +22,7 @@
     "web/index.web.ts"
   ],
   "include": [
+    "src/**/*",
     "typings/**/*"
   ],
   "awesomeTypescriptLoaderOptions": {
