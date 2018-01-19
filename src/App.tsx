@@ -1,5 +1,7 @@
 import { useStrict } from "mobx";
-import { Provider } from "mobx-react";
+import { observer, Provider } from "mobx-react";
+import { hot } from "react-hot-loader";
+
 import React from "react";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Link, Route, Router, Switch } from "router/index";
@@ -12,7 +14,7 @@ import { AccountStore } from "./stores";
 import { auth } from "./utils/firebase";
 import { PrivateRoutes } from "./utils/security";
 
-import theme from "./styles/theme";
+import styleVariables from "./styles/variables";
 
 // Enable Mobx strict mode
 useStrict(true);
@@ -23,17 +25,8 @@ const rootStores = {
 };
 
 // Set global style variables, available in all stylesheets
-EStyleSheet.build(theme);
-
-export default class App extends React.Component {
-  private removeListener: () => void;
-
-  public componentDidMount() {
-    this.removeListener = auth.onAuthStateChanged((user) => {
-      console.log(user);
-    });
-  }
-
+EStyleSheet.build(styleVariables);
+class App extends React.Component {
   public render() {
     return (
       <Provider {...rootStores}>
@@ -50,3 +43,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default hot(module)(App);

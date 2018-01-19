@@ -1,18 +1,12 @@
 import React from "react";
-import { View } from "react-native";
-import EStyleSheet from "react-native-extended-stylesheet";
 
+import { Container } from "components/atoms";
 interface IProps {
-  children: React.ReactChild;
+  children?: any;
 }
-const GenericTemplate = (props: IProps) => (
-  <View style={styles.container}>{props.children}</View>
-);
 
-const styles = EStyleSheet.create({
-  container: {
-    height: "100%",
-  },
-});
+const GenericTemplate = (props: IProps) => (
+  <Container>{props.children}</Container>
+);
 
 export default GenericTemplate;

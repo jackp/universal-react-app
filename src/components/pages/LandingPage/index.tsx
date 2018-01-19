@@ -14,8 +14,6 @@ interface LandingPageProps {
 @observer
 export default class LandingPage extends React.Component<LandingPageProps> {
   public render() {
-    console.log("User", this.props.account.loggedIn);
-
     return (
       <GenericTemplate>
         <Form
